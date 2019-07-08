@@ -41,6 +41,8 @@ int main() {
     };
     
     string data;
+    int pairCount;
+    int tripleCount;
     
     inFile.open("/Users/stahl/Desktop/Guardians/AdventCodeDay2/AdventCodeDay2/infile.txt");
     
@@ -50,13 +52,12 @@ int main() {
     } else {
         cout << "File found!" << endl;
     }
- 
+    
+    inFile >> data;
     while (!inFile.eof()) {
-        inFile >> data;
+        
         bool pair = false;
         bool triple = false;
-        int pairCount;
-        int tripleCount;
 
         cout << data << endl;
         for (int i = 0; i < data.size(); i++) {
@@ -64,19 +65,24 @@ int main() {
                 if (data.at(i) == myArray[k].letter) {
                     myArray[k].count++;
                 }
-                
-                if (myArray[k].count == 2 && pair != true) {
-                    pair = true;
-                    pairCount++;
-                    cout << myArray[k].letter << " " << myArray[k].count << endl;
-                } else if (myArray[k].count == 3 && triple != true) {
-                    triple = true;
-                    tripleCount++;
-                    cout << myArray[k].letter << " " << myArray[k].count << endl;
-                }
-                
-                myArray[i].count = 0;
             }
         }
+        
+        for (int a = 0; a < 26; a++) {
+            if (myArray[a].count == 2 && pair != true) {
+                pair = true;
+                pairCount++;
+                cout << myArray[a].letter << " " << myArray[a].count << endl;
+            } else if (myArray[a].count == 3 && triple != true) {
+                triple = true;
+                tripleCount++;
+                cout << myArray[a].letter << " " << myArray[a].count << endl;
+            }
+            
+            myArray[a].count = 0;
+        }
+        inFile >> data;
     }
+    cout << "Pairs " << pairCount << endl;
+    cout << "Triples " << tripleCount << endl;
 }
