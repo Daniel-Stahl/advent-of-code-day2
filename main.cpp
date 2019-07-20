@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -41,8 +42,9 @@ int main() {
     };
     
     string data;
-    int pairCount;
-    int tripleCount;
+    //int pairCount;
+    //int tripleCount;
+    vector<string> vec;
     
     inFile.open("/Users/stahl/Desktop/Guardians/AdventCodeDay2/AdventCodeDay2/infile.txt");
     
@@ -56,33 +58,58 @@ int main() {
     inFile >> data;
     while (!inFile.eof()) {
         
-        bool pair = false;
-        bool triple = false;
-
-        cout << data << endl;
-        for (int i = 0; i < data.size(); i++) {
-            for (int k = 0; k < 26; k++) {
-                if (data.at(i) == myArray[k].letter) {
-                    myArray[k].count++;
-                }
-            }
-        }
+//        bool pair = false;
+//        bool triple = false;
+//
+//        cout << data << endl;
+//        for (int i = 0; i < data.size(); i++) {
+//            for (int k = 0; k < 26; k++) {
+//                if (data.at(i) == myArray[k].letter) {
+//                    myArray[k].count++;
+//                }
+//            }
+//        }
+//
+//        for (int a = 0; a < 26; a++) {
+//            if (myArray[a].count == 2 && pair != true) {
+//                pair = true;
+//                pairCount++;
+//                cout << myArray[a].letter << " " << myArray[a].count << endl;
+//            } else if (myArray[a].count == 3 && triple != true) {
+//                triple = true;
+//                tripleCount++;
+//                cout << myArray[a].letter << " " << myArray[a].count << endl;
+//            }
+//
+//            myArray[a].count = 0;
+//        }
         
-        for (int a = 0; a < 26; a++) {
-            if (myArray[a].count == 2 && pair != true) {
-                pair = true;
-                pairCount++;
-                cout << myArray[a].letter << " " << myArray[a].count << endl;
-            } else if (myArray[a].count == 3 && triple != true) {
-                triple = true;
-                tripleCount++;
-                cout << myArray[a].letter << " " << myArray[a].count << endl;
-            }
-            
-            myArray[a].count = 0;
-        }
+        //PART 2
+        vec.push_back(data);
+        
+        
         inFile >> data;
     }
-    cout << "Pairs " << pairCount << endl;
-    cout << "Triples " << tripleCount << endl;
+    //PART 2
+    int irreg;
+    for (int x = 0; x < vec.size(); x++) {
+        for (int y = x+1; y < vec.size(); y++) {
+            for (int z = 0; z < vec.at(x).size() - 1; z++) {
+                if (vec.at(x).at(z) != vec.at(y).at(z)) {
+                    irreg++;
+                }
+            }
+            
+            if (irreg == 1) {
+                cout << vec.at(x) << endl;
+                cout << vec.at(y) << endl;
+                cout << irreg << endl;
+            }
+            irreg = 0;
+            
+        }
+        
+    }
+    //cout << "Pairs " << pairCount << endl;
+    //cout << "Triples " << tripleCount << endl;
 }
